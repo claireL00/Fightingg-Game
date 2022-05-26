@@ -2,7 +2,7 @@
 const canvas=document.querySelector('canvas');
 const c= canvas.getContext('2d');
  canvas.width=1024 //pixels
- canvas.height=576
+ canvas.height=576;
 
 //draw rectangle on the canvas (start position, canvas width, canvas height)
 c.fillRect(0,0,canvas.width, canvas.height)
@@ -26,6 +26,7 @@ class Sprite{
         }
         this.color=color
         this.isAttacking
+        this.health=100
     }
 
     draw(){
@@ -160,7 +161,8 @@ function animate(){
         && player.isAttacking
         ){
         player.isAttacking=false
-        console.log('go')
+        enemy.health -=20
+        document.querySelector('#enemyHealth').style.width=enemy.health +'%'
     }
     if(
         rectangularCollision({
@@ -170,7 +172,8 @@ function animate(){
         && enemy.isAttacking
         ){
         enemy.isAttacking=false
-        console.log('enemy attack successful')
+        player.health -=20
+        document.querySelector('#playerHealth').style.width=player.health +'%'
     }
 }
 
